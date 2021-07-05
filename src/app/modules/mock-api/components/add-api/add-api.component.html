@@ -1,0 +1,88 @@
+<app-loader [loading]="loading"></app-loader>
+<div class="add-api-page">
+    <h4 class="page-title">Add API</h4>
+    <div class="add-api-body">
+        <form name="APIFrm" [formGroup]="APIFrom" (submit)="save()" autocomplete="false">
+            <div class="form-group">
+                <input type="text" class="form-control" name="title" placeholder="Title" formControlName="title"
+                    [ngClass]="{ 'invalid-field': isSubmitted && formControls.title.errors }">
+                <label class="input-label">Title</label>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group input-group">
+                        <span class="form-control-text">{{mockAPIbaseUrl}}</span>
+                        <input type="text" class="form-control" name="url" placeholder="API Url" formControlName="url"
+                            [ngClass]="{ 'invalid-field': isSubmitted && formControls.url.errors }">
+                        <label class="input-label">API Url</label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group input-group">
+                        <select class="form-control" name="method" placeholder="Method" formControlName="method"
+                            [ngClass]="{ 'invalid-field': isSubmitted && formControls.method.errors }">
+                            <option>GET</option>
+                            <option>POST</option>
+                            <option>PUT</option>
+                            <option>DELETE</option>
+                        </select>
+                        <label class="input-label">Method</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <textarea class="form-control api-request-json" name="input_json"
+                            placeholder="Request field name" formControlName="input_json"
+                            [ngClass]="{ 'invalid-field': isSubmitted && formControls.input_json.errors }"></textarea>
+                        <label class="input-label">Request field name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="normal-label">Authorization Require - </label>
+                        <label class="form-switch">
+                            <input type="checkbox" name="auth_require" formControlName="auth_require" value="yes"
+                                (change)="onCheckboxChange($event, 'auth_require');">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row vertical-tab api-response-json">
+                <div class="col-md-3 tab-list">
+                    <ul>
+                        <li [ngClass]="{'active': activeResponseTab === 'response-tab1'}"
+                            (click)="changeTab('response-tab1')">Response(Success)</li>
+                        <li [ngClass]="{'active': activeResponseTab === 'response-tab2'}"
+                            (click)="changeTab('response-tab2')">Response(Failed)</li>
+                    </ul>
+                </div>
+                <div class="col-md-9 tab-content">
+                    <div class="" [style.display]="activeResponseTab === 'response-tab1' ? 'block' : 'none'">
+                        <div class="form-group">
+                            <textarea class="form-control api-response-success-json" name="success_json"
+                                placeholder="Response(Success)" formControlName="success_json"
+                                [ngClass]="{ 'invalid-field': isSubmitted && formControls.success_json.errors }"></textarea>
+                            <label class="input-label">Response(Success)</label>
+                        </div>
+                    </div>
+                    <div class="" [style.display]="activeResponseTab === 'response-tab2' ? 'block' : 'none'">
+                        <div class="form-group">
+                            <textarea class="form-control api-response-error-json" name="failed_json"
+                                placeholder="Response(Failed)" formControlName="failed_json"
+                                [ngClass]="{ 'invalid-field': isSubmitted && formControls.failed_json.errors }"></textarea>
+                            <label class="input-label">Response(Failed)</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center act-btn-grp">
+                <button type="submit" class="btn btn-primary btn-lg">Save</button>
+                <a class="btn btn-outline-secondary btn-lg" [routerLink]="['/mock-api']">Cancel</a>
+            </div>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

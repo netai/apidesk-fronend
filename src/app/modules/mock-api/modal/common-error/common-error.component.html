@@ -1,0 +1,28 @@
+<app-loader [loading]="loading" [type]="'small'"></app-loader>
+<div class="modal-header">
+    <div class="modal-title">
+        Common Errors
+    </div>
+</div>
+<form name="commonErrorFrm" (submit)="save()">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea class="form-control error-json" placeholder="Response(Invalid Token)"></textarea>
+                    <label class="input-label">Response(Invalid Token)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <textarea class="form-control error-json" placeholder="Response(Unknown Error)"></textarea>
+                    <label class="input-label">Response(Unknown Error)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancel</button>
+    </div>
+</form>

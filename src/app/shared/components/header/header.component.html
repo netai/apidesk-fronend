@@ -1,0 +1,14 @@
+<header class="header bg-white border-bottom shadow-sm">
+    <nav class="navbar navbar-expand-lg">
+        <div class="nav-left">
+            <a href="#/"><span class="navbar-brand logo">API<span class="second-part">desk</span></span></a>
+        </div>
+        <div class="nav-right" *ngIf="isLoggedIn">
+            <ul class="list-flat">
+                <li>
+                    <a (click)="logout()" href="javascript:void(0)"><i class="fa fa-sign-out" aria-hidden="true"></i><span>Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

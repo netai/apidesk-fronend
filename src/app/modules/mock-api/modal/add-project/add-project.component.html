@@ -1,0 +1,18 @@
+<app-loader [loading]="loading" [type]="'small'"></app-loader>
+<div class="modal-header">
+    <div class="modal-title">
+        Add Project
+    </div>
+</div>
+<form name="projectFrm"  [formGroup]="projectForm" (submit)="save()">
+    <div class="modal-body">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Project Name" formControlName="project_name" [ngClass]="{ 'invalid-field': isSubmitted && formControls.project_name.errors }">
+            <label class="input-label">Project Name</label>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-outline-secondary" (click)="bsModalRef.hide()">Cancel</button>
+    </div>
+</form>

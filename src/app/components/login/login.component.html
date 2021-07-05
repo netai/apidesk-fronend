@@ -1,0 +1,30 @@
+<app-header></app-header>
+<div class="login-page container main-container bg-white">
+  <app-message position="top-right"></app-message>
+  <app-loader [loading]="loading"></app-loader>
+  <div class="login-box w-100" *ngIf="!loading">
+    <h3 class="text-center mb-5 box-heading">Login</h3>
+    <div class="alert alert-danger" role="alert" *ngIf="messages.length>0">
+      <div *ngFor="let message of messages">{{message}}</div>
+    </div>
+    <form [formGroup]="authForm" name="authForm" (submit)="login()">
+      <div class="form-group">
+        <input type="username" class="form-control form-control-lg" formControlName="username" placeholder="username"
+          [ngClass]="{ 'invalid-field': isSubmitted && formControls.username.errors }">
+        <label class="input-label">Username</label>
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control form-control-lg" formControlName="password" placeholder="Password"
+          [ngClass]="{ 'invalid-field': isSubmitted && formControls.password.errors }">
+        <label class="input-label">Password</label>
+      </div>
+      <div class="text-center login-btn">
+        <button type="submit" class="btn btn-primary btn-lg">Login</button>
+      </div>
+      <div class="login-options">
+        <span>No account? <a [routerLink]="['/signup']">Create one!</a></span>
+      </div>
+    </form>
+  </div>
+</div>
+<app-footer></app-footer>

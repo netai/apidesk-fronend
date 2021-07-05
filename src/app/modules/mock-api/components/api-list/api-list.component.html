@@ -1,0 +1,95 @@
+<app-loader [loading]="loading"></app-loader>
+<div class="api-list-page">
+  <h4 class="page-title">API Details</h4>
+  <div class="api-list-body">
+    <div class="api-detail">
+      <div class="row">
+        <div class="col-md-6 view-group">
+          <div class="caption"><strong>API Key:</strong></div>
+          <div class="value">{{userDetail.api_key}}</div>
+          <div class="clearfix"></div>
+          <div class="help-text">Send this API Key to the APIs either by using APP_KEY parameter inside the HTTP
+            header or by sending an api_key parameter via the query string</div>
+        </div>
+        <div class="col-md-6 auth-token-grp">
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Auth Token" [value]="userDetail.mock_auth_token">
+            <label class="input-label">Auth Token</label>
+            <button class="btn btn-primary"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+            <div class="help-text">This auth token will send from APIs if you have used '&lt;AUTH-TOKEN&gt;' tag inside
+              the response json and same will verify if you 'ON' Authentication Required option, <br />Send this Auth
+              Token to the APIs by sending an 'Authorization' parameter via HTTP header</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4 class="page-title">API List<a class="add-api" href="javascript:void(0)" (click)="openAddProject()"><i
+          class="fa fa-plus" aria-hidden="true"></i>Add Project</a></h4>
+    <div class="api-list-project">
+      <div class="row vertical-tab">
+        <div class="col-md-3 tab-list">
+          <ul>
+            <li *ngFor="let project of projectList"
+              [ngClass]="{'active': activeProjectTab === 'project-tab-'+project.id}"
+              (click)="changeTab('project-tab-'+project.id)">{{project.project_name}}</li>
+          </ul>
+        </div>
+        <div class="col-md-9 tab-content">
+          <div class="empty-record" *ngIf="projectList.length===0">
+            <h4>No project available.</h4>
+            <p>Please add a project</p>
+          </div>
+          <div class="" *ngFor="let project of projectList"
+            [style.display]="activeProjectTab === 'project-tab-'+project.id ? 'block' : 'none'">
+            <div class="project-act-grp">
+              <a class="common-error-api" href="javascript:void(0)" (click)="openCommonError()"><i
+                  class="fa fa-exclamation-triangle" aria-hidden="true"></i>Common Error</a>
+              <a class="add-api" [routerLink]="['/mock-api',project.id,'add-api']"><i class="fa fa-plus" aria-hidden="true"></i>Add
+                API</a>
+              <div class="clearfix"></div>
+            </div>
+            <accordion [isAnimated]="true" [closeOthers]="true" *ngFor="let api of project.APIs">
+              <accordion-group>
+                <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                  <div class="pull-left float-left">{{api.title}}</div>
+                  <span class="pull-right">[{{api.method}}]</span>
+                </button>
+                <div class="acc-body">
+                  <div class="view-group">
+                    <div class="caption"><strong>URL:</strong></div>
+                    <div class="value">{{mockAPIbaseUrl+api.url}}</div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="view-group">
+                    <div class="caption"><strong>Auth Require:</strong></div>
+                    <div class="value"><span *ngIf="api.auth_require">YES</span><span *ngIf="!api.auth_require">NO</span></div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="view-group">
+                    <div class="caption"><strong>Last Param:</strong></div>
+                    <div class="value">Not Available</div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="view-group">
+                    <div class="caption"><strong>Last Body:</strong></div>
+                    <div class="value">Not Available</div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="act-btn">
+                    <a class="delete-link" href="javascript:void(0)"><i class="fa fa-trash-o"
+                        aria-hidden="true"></i>Delete</a>
+                    <a class="edit-link" [routerLink]="['/mock-api/edit-api', '2']"><i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i>Edit</a>
+                  </div>
+                </div>
+              </accordion-group>
+            </accordion>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="api-list-acc">
+
+  </div>
+</div>
